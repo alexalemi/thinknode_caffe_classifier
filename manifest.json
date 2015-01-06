@@ -1,0 +1,280 @@
+{
+    "name": "caffe-classifier",
+    "description": "a caffe model runner, along with reference googlenet imagenet image classification",
+    "version": "1.0.0",
+    "provider": {
+        "type": "python",
+        "python": {
+            "script": "./src/main.py"
+        }
+    },
+    "dependencies": {},
+    "types": [{
+        "name": "input",
+        "description": "array of input blobs",
+        "revision": 1,
+        "schema": {
+            "type": "array_type",
+            "array_type": {
+                "element_schema": {
+                    "type": "simple_type",
+                    "simple_type": "blob"
+                },
+                "size": null
+            }
+        }
+    }, {
+        "name": "prototxt",
+        "desciption": "caffe prototxt file blob",
+        "revision": 1,
+        "schema": {
+            "type": "simple_type",
+            "simple_type": "blob"
+        }
+    }, {
+        "name": "caffemodel",
+        "description": "caffe parameter file blob",
+        "revision": 1,
+        "schema": {
+            "type": "simple_type",
+            "simple_type": "blob"
+        }
+    }, {
+        "name": "prototxt_ref",
+        "desciption": "caffe prototxt file reference",
+        "revision": 1,
+        "schema": {
+            "type": "reference_type",
+            "reference_type": {
+                "type": "simple_type",
+                "simple_type": "blob"
+            }
+        }
+    }, {
+        "name": "caffemodel_ref",
+        "description": "caffe parameter file reference",
+        "revision": 1,
+        "schema": {
+            "type": "reference_type",
+            "reference_type": {
+                "type": "simple_type",
+                "simple_type": "blob"
+            }
+        }
+    }, {
+        "name": "prediction_probs",
+        "description": "output probabilities",
+        "revision": 1,
+        "schema": {
+            "type": "array_type",
+            "array_type": {
+                "element_schema": {
+                    "type": "simple_type",
+                    "simple_type": "number"
+                },
+                "size": null
+            }
+        }
+    }, {
+        "name": "prediction_top5",
+        "description": "output probabilities",
+        "revision": 1,
+        "schema": {
+            "type": "array_type",
+            "array_type": {
+                "element_schema": {
+                    "type": "array_type",
+                    "array_type": {
+                        "element_schema": {
+                            "type": "simple_type",
+                            "simple_type": "string"
+                        }
+                        "size": 5
+                    }
+                },
+                "size": null
+            }
+        }
+    }, {
+        "name": "category_labels",
+        "description": "output class labels",
+        "revision": 1,
+        "schema": {
+            "type": "array_type",
+            "array_type": {
+                "element_schema": {
+                    "type": "simple_type",
+                    "simple_type": "string"
+                },
+                "size": null
+            }
+        }
+    }],
+    "functions": [{
+        "name": "classify_images",
+        "uid": "classify_images_v1.0.0",
+        "description": "Classify a set of images using the Googlenet reference network",
+        "execution_class": "ST",
+        "schema": {
+            "type": "function_type",
+            "function_type": {
+                "parameters": [{
+                    "name": "input",
+                    "description": "the images we want to classify",
+                    "schema": {
+                        "type": "named_type",
+                        "named_type": {
+                            "app": "caffe-classifier",
+                            "type": "input"
+                        }
+                    }
+                }],
+                "returns": {
+                    "description": "Top 5 image class probabilities",
+                    "schema": {
+                        "type": "named_type",
+                        "named_type": {
+                            "app": "caffe-classifier",
+                            "type": "prediction_top5"
+                        }
+                    }
+                }
+            }
+        }
+    }, {
+        "name": "classify_images_probabilities",
+        "uid": "classify_images_v1.0.0",
+        "description": "Classify a set of images using the Googlenet reference network, and return all of the probabilities",
+        "execution_class": "ST",
+        "schema": {
+            "type": "function_type",
+            "function_type": {
+                "parameters": [{
+                    "name": "input",
+                    "description": "the images we want to classify",
+                    "schema": {
+                        "type": "named_type",
+                        "named_type": {
+                            "app": "caffe-classifier",
+                            "type": "input"
+                        }
+                    }
+                }],
+                "returns": {
+                    "description": "Image class probabilities",
+                    "schema": {
+                        "type": "named_type",
+                        "named_type": {
+                            "app": "caffe-classifier",
+                            "type": "prediction_probs"
+                        }
+                    }
+                }
+            }
+        }
+    }, {
+        "name": "classify_with_model",
+        "uid": "classify_with_model_v1.0.0",
+        "description": "Classify a set of images with the provided model and parameters",
+        "execution_class": "ST",
+        "schema": {
+            "type": "function_type",
+            "function_type": {
+                "parameters": [{
+                    "name": "prototxt",
+                    "description": "the model prototxt file as a blob",
+                    "schema": {
+                        "type": "named_type",
+                        "named_type": {
+                            "app": "caffe-classifier",
+                            "type": "prototxt"
+                        }
+                    }
+                },{
+                    "name": "caffemodel",
+                    "description": "the caffemodel parameter file as a blob",
+                    "schema": {
+                        "type": "named_type",
+                        "named_type": {
+                            "app": "caffe-classifier",
+                            "type": "caffemodel"
+                        }
+                    }
+                },{
+                    "name": "input",
+                    "description": "the images we want to classify",
+                    "schema": {
+                        "type": "named_type",
+                        "named_type": {
+                            "app": "caffe-classifier",
+                            "type": "input"
+                        }
+                    }
+                }],
+                "returns": {
+                    "description": "Classification probabilities",
+                    "schema": {
+                        "type": "named_type",
+                        "named_type": {
+                            "app": "caffe-classifier",
+                            "type": "prediction_probs"
+                        }
+                    }
+                }
+            }
+        }
+    }, {
+        "name": "classify_with_model_reference",
+        "uid": "classify_with_model_reference_v1.0.0",
+        "description": "Classify a set of images with the provided model and parameter reference",
+        "execution_class": "ST",
+        "schema": {
+            "type": "function_type",
+            "function_type": {
+                "parameters": [{
+                    "name": "prototxt_ref",
+                    "description": "the model prototxt file as a reference",
+                    "schema": {
+                        "type": "named_type",
+                        "named_type": {
+                            "app": "caffe-classifier",
+                            "type": "prototxt_ref"
+                        }
+                    }
+                },{
+                    "name": "caffemodel_ref",
+                    "description": "the caffemodel parameter file as a reference",
+                    "schema": {
+                        "type": "named_type",
+                        "named_type": {
+                            "app": "caffe-classifier",
+                            "type": "caffemodel_ref"
+                        }
+                    }
+                },{
+                    "name": "input",
+                    "description": "the images we want to classify",
+                    "schema": {
+                        "type": "named_type",
+                        "named_type": {
+                            "app": "caffe-classifier",
+                            "type": "input"
+                        }
+                    }
+                }],
+                "returns": {
+                    "description": "Classification probabilities",
+                    "schema": {
+                        "type": "named_type",
+                        "named_type": {
+                            "app": "caffe-classifier",
+                            "type": "prediction_probs"
+                        }
+                    }
+                }
+            }
+        }
+    }]
+}
+
+    
