@@ -40,28 +40,6 @@
             "simple_type": "blob"
         }
     }, {
-        "name": "prototxt_ref",
-        "desciption": "caffe prototxt file reference",
-        "revision": 1,
-        "schema": {
-            "type": "reference_type",
-            "reference_type": {
-                "type": "simple_type",
-                "simple_type": "blob"
-            }
-        }
-    }, {
-        "name": "caffemodel_ref",
-        "description": "caffe parameter file reference",
-        "revision": 1,
-        "schema": {
-            "type": "reference_type",
-            "reference_type": {
-                "type": "simple_type",
-                "simple_type": "blob"
-            }
-        }
-    }, {
         "name": "prediction_probs",
         "description": "output probabilities",
         "revision": 1,
@@ -77,22 +55,50 @@
         }
     }, {
         "name": "prediction_top5",
-        "description": "output probabilities",
+        "description": "output top5 categories",
         "revision": 1,
         "schema": {
-            "type": "array_type",
-            "array_type": {
-                "element_schema": {
-                    "type": "array_type",
-                    "array_type": {
-                        "element_schema": {
-                            "type": "simple_type",
-                            "simple_type": "string"
+            "type": "structure_type",
+            "structure_type": {
+                "fields": [{
+                    "name": "classes",
+                    "description": "the top5 classes",
+                    "schema": {
+                        "type": "array_type",
+                        "array_type": {
+                            "element_schema": {
+                                "type": "array_type",
+                                "array_type": {
+                                    "element_schema": {
+                                        "type": "simple_type",
+                                        "simple_type": "string"
+                                    },
+                                    "size": 5
+                                }
+                            },
+                            "size": null
+                            }
                         }
-                        "size": 5
+                    }, {
+                    "name": "probabilities",
+                    "description": "the top5 probabilities",
+                    "schema": {
+                        "type": "array_type",
+                        "array_type": {
+                            "element_schema": {
+                                "type": "array_type",
+                                "array_type": {
+                                    "element_schema": {
+                                        "type": "simple_type",
+                                        "simple_type": "number"
+                                    },
+                                    "size": 5
+                                }
+                            },
+                            "size": null
+                        }
                     }
-                },
-                "size": null
+                }]
             }
         }
     }, {
@@ -224,31 +230,41 @@
             }
         }
     }, {
-        "name": "classify_with_model_reference",
-        "uid": "classify_with_model_reference_v1.0.0",
-        "description": "Classify a set of images with the provided model and parameter reference",
+        "name": "classify_with_model_class_top5",
+        "uid": "classify_with_model_class_top5_v1.0.0",
+        "description": "Classify a set of images with the provided model and parameters, and category labels, give top 5",
         "execution_class": "ST",
         "schema": {
             "type": "function_type",
             "function_type": {
                 "parameters": [{
-                    "name": "prototxt_ref",
-                    "description": "the model prototxt file as a reference",
+                    "name": "prototxt",
+                    "description": "the model prototxt file as a blob",
                     "schema": {
                         "type": "named_type",
                         "named_type": {
                             "app": "caffe-classifier",
-                            "type": "prototxt_ref"
+                            "type": "prototxt"
                         }
                     }
                 },{
-                    "name": "caffemodel_ref",
-                    "description": "the caffemodel parameter file as a reference",
+                    "name": "caffemodel",
+                    "description": "the caffemodel parameter file as a blob",
                     "schema": {
                         "type": "named_type",
                         "named_type": {
                             "app": "caffe-classifier",
-                            "type": "caffemodel_ref"
+                            "type": "caffemodel"
+                        }
+                    }
+                },{
+                    "name": "category_labels",
+                    "description": "the labels for the categories",
+                    "schema": {
+                        "type": "named_type",
+                        "named_type": {
+                            "app": "caffe-classifier",
+                            "type": "category_labels"
                         }
                     }
                 },{
@@ -268,7 +284,7 @@
                         "type": "named_type",
                         "named_type": {
                             "app": "caffe-classifier",
-                            "type": "prediction_probs"
+                            "type": "prediction_top5"
                         }
                     }
                 }
@@ -276,5 +292,3 @@
         }
     }]
 }
-
-    
