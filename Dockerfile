@@ -5,9 +5,6 @@ FROM tleyden5iwx/caffe
 COPY . /src/
 WORKDIR /src/
 
-# set up fake environment variables
-CMD source /src/testbashenv
-
 # run the thing
-ENTRYPOINT ["python", "/src/caffe_classifier.py"]
+ENTRYPOINT ["python", "/src/main.py"]
 

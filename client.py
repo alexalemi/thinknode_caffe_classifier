@@ -3,8 +3,9 @@ from thinksocket import ThinkSocket
 with ThinkSocket() as sock:
     sock.connect()
 
-    registration_payload = {"type": "registration", "registration": 1231 }
-    sock.send_json(registration_payload)
+    sock.register()
+    # registration_payload = {"type": "registration", "registration": 1231 }
+    # sock.send_json(registration_payload)
 
     function_req = sock.receive_json()
     print "Got function req:", function_req

@@ -1,3 +1,0 @@
-export THINKNODE_HOST=localhost
-export THINKNODE_PORT=50031
-export THINKNODE_PID=123

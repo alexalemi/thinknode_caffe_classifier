@@ -1,0 +1,11 @@
+{
+    "type": "function",
+    "function": {
+        "app": "caffe_classifier",
+        "name": "classify_images",
+        "args": [{
+            "type": "base64-encoded-blob",
+            "blob": ""
+        }]
+    }
+}

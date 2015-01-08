@@ -1,0 +1,3 @@
+#! /bin/bash
+
+docker run -e "THINKNODE_HOST=172.17.42.1" -e "THINKNODE_PORT=5001" -e "THINKNODE_PID=1234" -i -t testcaffe /bin/bash 

@@ -1,5 +1,5 @@
 {
-    "name": "caffe-classifier",
+    "name": "caffe_classifier",
     "description": "a caffe model runner, along with reference googlenet imagenet image classification",
     "version": "1.0.0",
     "provider": {
@@ -130,7 +130,7 @@
                     "schema": {
                         "type": "named_type",
                         "named_type": {
-                            "app": "caffe-classifier",
+                            "app": "caffe_classifier",
                             "type": "input"
                         }
                     }
@@ -140,7 +140,7 @@
                     "schema": {
                         "type": "named_type",
                         "named_type": {
-                            "app": "caffe-classifier",
+                            "app": "caffe_classifier",
                             "type": "prediction_top5"
                         }
                     }
@@ -149,7 +149,7 @@
         }
     }, {
         "name": "classify_images_probabilities",
-        "uid": "classify_images_v1.0.0",
+        "uid": "classify_images_probabilities_v1.0.0",
         "description": "Classify a set of images using the Googlenet reference network, and return all of the probabilities",
         "execution_class": "ST",
         "schema": {
@@ -161,7 +161,7 @@
                     "schema": {
                         "type": "named_type",
                         "named_type": {
-                            "app": "caffe-classifier",
+                            "app": "caffe_classifier",
                             "type": "input"
                         }
                     }
@@ -171,7 +171,7 @@
                     "schema": {
                         "type": "named_type",
                         "named_type": {
-                            "app": "caffe-classifier",
+                            "app": "caffe_classifier",
                             "type": "prediction_probs"
                         }
                     }
@@ -192,7 +192,7 @@
                     "schema": {
                         "type": "named_type",
                         "named_type": {
-                            "app": "caffe-classifier",
+                            "app": "caffe_classifier",
                             "type": "prototxt"
                         }
                     }
@@ -202,7 +202,7 @@
                     "schema": {
                         "type": "named_type",
                         "named_type": {
-                            "app": "caffe-classifier",
+                            "app": "caffe_classifier",
                             "type": "caffemodel"
                         }
                     }
@@ -212,7 +212,7 @@
                     "schema": {
                         "type": "named_type",
                         "named_type": {
-                            "app": "caffe-classifier",
+                            "app": "caffe_classifier",
                             "type": "input"
                         }
                     }
@@ -222,7 +222,7 @@
                     "schema": {
                         "type": "named_type",
                         "named_type": {
-                            "app": "caffe-classifier",
+                            "app": "caffe_classifier",
                             "type": "prediction_probs"
                         }
                     }
@@ -243,7 +243,7 @@
                     "schema": {
                         "type": "named_type",
                         "named_type": {
-                            "app": "caffe-classifier",
+                            "app": "caffe_classifier",
                             "type": "prototxt"
                         }
                     }
@@ -253,7 +253,7 @@
                     "schema": {
                         "type": "named_type",
                         "named_type": {
-                            "app": "caffe-classifier",
+                            "app": "caffe_classifier",
                             "type": "caffemodel"
                         }
                     }
@@ -263,7 +263,7 @@
                     "schema": {
                         "type": "named_type",
                         "named_type": {
-                            "app": "caffe-classifier",
+                            "app": "caffe_classifier",
                             "type": "category_labels"
                         }
                     }
@@ -273,7 +273,7 @@
                     "schema": {
                         "type": "named_type",
                         "named_type": {
-                            "app": "caffe-classifier",
+                            "app": "caffe_classifier",
                             "type": "input"
                         }
                     }
@@ -283,7 +283,7 @@
                     "schema": {
                         "type": "named_type",
                         "named_type": {
-                            "app": "caffe-classifier",
+                            "app": "caffe_classifier",
                             "type": "prediction_top5"
                         }
                     }
