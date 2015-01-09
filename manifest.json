@@ -144,7 +144,8 @@
                                         },
                                         "size": 5
                                     }
-                                }, {
+                                }
+                            }, {
                                 "name": "probabilities",
                                 "description": "the top5 probabilities",
                                 "schema": {
