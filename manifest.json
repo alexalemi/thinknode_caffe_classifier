@@ -24,7 +24,7 @@
         }
     }, {
         "name": "prototxt",
-        "desciption": "caffe prototxt file blob",
+        "description": "caffe prototxt file blob",
         "revision": 1,
         "schema": {
             "type": "simple_type",
