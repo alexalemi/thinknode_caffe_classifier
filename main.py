@@ -123,6 +123,7 @@ if __name__ == "__main__":
         logging.info("Generated result: %r", result)
 
         logging.debug("Sending result")
-        sock.send_json(result)
+        result_obj = {"type": "result", "result": result }
+        sock.send_json(result_obj)
         logging.debug("FINISHED")
 

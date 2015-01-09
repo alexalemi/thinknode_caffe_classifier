@@ -1,5 +1,6 @@
 from thinksocket import ThinkSocket
 import base64
+import glob
 
 with ThinkSocket() as sock:
     sock.bind()
@@ -11,16 +12,21 @@ with ThinkSocket() as sock:
         registration = conn.receive_json()
         print "Got Registration", registration
 
-        with open("test/cat.jpg") as f:
-            cat = f.read()
-        cat64 = base64.b64encode(cat)
+        
+        b64s = []
+        for fl in glob.glob("test/imgs/*.jpg"):
+            print fl
+            with open(fl) as f:
+                img = f.read()
+            img64 = base64.b64encode(img)
+            b64s.append(img64)
 
         function_req = {
                 "type":"function", 
                 "function": {
                     "uid": "classify_images_v1.0.0", 
-                    "args": [[{ "type":"base64-encoded-blob",
-                            "blob": cat64 }]]
+                    "args": [[ { "type":"base64-encoded-blob",
+                            "blob": img64 }  for img64 in b64s  ]]
                     }
                 }
         conn.send_json(function_req)
