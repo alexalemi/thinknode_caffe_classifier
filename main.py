@@ -131,15 +131,26 @@ if __name__ == "__main__":
         logging.debug("Sending registration message.")
         sock.register()
 
-        logging.debug("Recieving function_req")
-        function_req = sock.receive_json()
+        try: 
+            logging.debug("Recieving function_req")
+            function_req = sock.receive_json()
 
-        logging.debug("Computing result")
-        result = handle_function_req(function_req)
-        logging.info("Generated result: %r", result)
+            logging.debug("Computing result")
+            result = handle_function_req(function_req)
+            logging.info("Generated result: %r", result)
 
-        logging.debug("Sending result")
-        result_obj = {"type": "result", "result": result }
-        sock.send_json(result_obj)
-        logging.debug("FINISHED")
+            logging.debug("Sending result")
+            result_obj = {"type": "result", "result": result }
+            sock.send_json(result_obj)
+            logging.debug("FINISHED")
+        except Exception as e:
+            logging.exception("We've hit an error!")
+
+            err_obj = {"type":"failure",
+                    "failure": {
+                        "code": e.__class__.__name__,
+                        "message": e.message
+                        }
+                    }
+            sock.send_json(err_obj)
 
