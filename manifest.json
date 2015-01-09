@@ -19,8 +19,7 @@
                 "element_schema": {
                     "type": "simple_type",
                     "simple_type": "blob"
-                },
-                "size": null
+                }
             }
         }
     }, {
@@ -49,8 +48,7 @@
                 "element_schema": {
                     "type": "simple_type",
                     "simple_type": "number"
-                },
-                "size": null
+                }
             }
         }
     }, {
@@ -75,8 +73,7 @@
                                     },
                                     "size": 5
                                 }
-                            },
-                            "size": null
+                            }
                             }
                         }
                     }, {
@@ -94,8 +91,7 @@
                                     },
                                     "size": 5
                                 }
-                            },
-                            "size": null
+                            }
                         }
                     }
                 }]
@@ -111,8 +107,7 @@
                 "element_schema": {
                     "type": "simple_type",
                     "simple_type": "string"
-                },
-                "size": null
+                }
             }
         }
     }],
