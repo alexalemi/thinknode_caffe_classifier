@@ -24,6 +24,19 @@ def process_input( inputjson ):
     flnames = [ process_blobobj_to_file(blobobj) for blobobj in inputjson ]
     return [ caffe_classifier.caffe.io.load_image(flname) for flname in flnames ]
 
+def classify_image(image):
+    """ Given a set of images, classify them and return the top5 probabilities """
+    logging.debug("Inside classify_images")
+    net = caffe_classifier.create_network()
+    prediction = caffe_classifier.classify_images(net, [image])
+    top = prediction.argsort(1)[:,::-1]
+
+    topcats = caffe_classifier.cats[top[:,:5]][0]
+    topprobs = prediction.take(top[:,:5])[0]
+
+    result = {"classes": topcats.tolist(), "probabilities": topprobs.tolist() }
+    return result
+
 def classify_images(images):
     """ Given a set of images, classify them and return the top5 probabilities """
     logging.debug("Inside classify_images")
@@ -83,7 +96,10 @@ def handle_function_req(function_req):
     logging.info("Running uid: %r", uid)
     args = function_req["function"]["args"]
 
-    if uid == "classify_images_v1.0.0":
+    if uid == "classify_image_v1.0.0":
+        images = process_input([args[0]])
+        result = classify_image(images[0])
+    elif uid == "classify_images_v1.0.0":
         images = process_input(args[0])
         result = classify_images(images)
     elif uid == "classify_images_probabilities_v1.0.0":

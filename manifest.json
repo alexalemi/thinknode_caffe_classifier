@@ -117,6 +117,58 @@
         }
     }],
     "functions": [{
+        "name": "classify_image",
+        "uid": "classify_image_v1.0.0",
+        "description": "Classify an image using the Googlenet reference network",
+        "execution_class": "ST",
+        "schema": {
+            "type": "function_type",
+            "function_type": {
+                "parameters": [{
+                    "name": "image",
+                    "description": "the image we want to classify",
+                    "schema": {
+                        "type": "simple_type",
+                        "simple_type": "blob"
+                    }
+                }],
+                "returns": {
+                    "description": "Top 5 image class probabilities",
+                    "schema": {
+                        "type": "structure_type",
+                        "structure_type": {
+                            "fields": [{
+                                "name": "classes",
+                                "description": "the top5 classes",
+                                "schema": {
+                                    "type": "array_type",
+                                    "array_type": {
+                                        "element_schema": {
+                                            "type": "simple_type",
+                                            "simple_type": "string"
+                                        },
+                                        "size": 5
+                                    }
+                                }, {
+                                "name": "probabilities",
+                                "description": "the top5 probabilities",
+                                "schema": {
+                                    "type": "array_type",
+                                    "array_type": {
+                                        "element_schema": {
+                                            "type": "simple_type",
+                                            "simple_type": "number"
+                                        },
+                                        "size": 5
+                                    }
+                                }
+                            }]
+                        }
+                    }
+                }
+            }
+        }
+    }, {
         "name": "classify_images",
         "uid": "classify_images_v1.0.0",
         "description": "Classify a set of images using the Googlenet reference network",
